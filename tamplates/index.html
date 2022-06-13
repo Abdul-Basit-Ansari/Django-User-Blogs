@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% block title %} Blogs | Ab-Blogs{% endblock title %} {% block body %} {% for b in blog %}
+<style>
+    .blogbox {
+        margin: 1rem 1rem 1rem 11rem;
+        border: .2rem solid black;
+        width: 50rem;
+        height: 10rem;
+        padding: 2%;
+    }
+    
+    .blogbtn {
+        display: inline-block;
+        color: #28A745;
+        border: .1rem solid #28A745;
+        border-radius: .5rem;
+        padding: 1.5% 2% 1.5% 2%;
+        margin: 0.5% 0% 1.5% 38em;
+        text-decoration: none;
+        text-align: right;
+        cursor: pointer;
+    }
+    
+    .blogbtn:hover {
+        background-color: #28A745;
+        color: #343A40;
+    }
+    
+    .title {
+        display: inline;
+    }
+    
+    .writter {
+        display: inline;
+    }
+    
+    .contant {
+        margin: 1% 1% 2% 1%;
+    }
+    
+    a {
+        text-decoration: none;
+        color: #28A745;
+    }
+</style>
+
+<div class="blogbox">
+    <div class="title">
+        <h1 class="title">{{b.title}}</h1>
+    </div>
+    <br>
+    <div class="writter">
+        <h3 class="writter">Writer : {{b.writter}}</h3>
+        <a href="blog/{{b.slug}}"><button class="blogbtn" type="button">Read Blog</button></a>
+    </div>
+    <hr>
+    <div class="contant">
+        <p>{{b.content | truncatechars:150}}</p>
+    </div>
+
+</div>
+
+
+{% endfor %} {% endblock body %}

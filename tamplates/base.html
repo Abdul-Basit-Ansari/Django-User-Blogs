@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+        }
+        
+        .navv {
+            background-color: #343A40;
+            /* display: inline-block; */
+        }
+        
+        .navh1 {
+            display: inline-block;
+            color: #28A745;
+            padding: .5%;
+            margin: .2% 0% .5% 1%;
+            text-decoration: none;
+        }
+        
+        .link {
+            display: inline-block;
+            color: #28A745;
+            border: .1rem solid #28A745;
+            border-radius: .5rem;
+            padding: .5% 1% .5% 1%;
+            margin: .5% 0% .5% 1%;
+            text-decoration: none;
+        }
+        
+        .link:hover {
+            background-color: #28A745;
+            color: #343A40;
+        }
+        
+        .side {
+            margin-top: -3.6rem;
+            /* position: relative; */
+            text-align: right;
+        }
+        
+        .msg {
+            background-color: #D4EDDA;
+            color: #343A40;
+            padding: 1%;
+        }
+        
+        #xbtn {
+            margin-top: -1.3rem;
+            text-align: right;
+        }
+        
+        #bt {
+            background-color: transparent;
+            color: gray;
+            border: 1px solid gray;
+            padding: .1rem .5rem;
+            border-radius: .54rem;
+            font-size: 1.54rem;
+        }
+        
+        #bt:hover {
+            background-color: gray;
+            color: whitesmoke;
+        }
+        
+        .danger {
+            background-color: #f5d1d4;
+            color: #343A40;
+            padding: 1%;
+        }
+        
+        .classToAssign {
+            display: none;
+        }
+    </style>
+
+    <div class="navv">
+
+        {% if user.is_authenticated %}
+        <a class="navh1" href="/login">
+            <h1>WELCOME {{request.user|upper}}</h1>
+        </a>
+        <div class="side">
+            <a class="link" href="/addblog">Add Blog</a>
+            <a class="link" href="/">Blogs</a>
+            <a class="link" href="#">Contact</a>
+            <a class="link" href="#">About</a>
+            <a class="link" href="/logout">Logout</a>
+        </div>
+        {% else %}
+        <a class="navh1" href="/">
+            <h1>Ab-Blogs</h1>
+        </a>
+        <a class="link" href="/login">login</a>
+        <a class="link" href="/signin">Signin</a>
+        <a class="link" href="/">Blogs</a>
+        <a class="link" href="#">Contact</a>
+        <a class="link" href="#">About</a> {% block link %} {% endblock link %} {% endif %}
+    </div>
+    {% if messages %} {% for message in messages %}
+    <div id="none">
+        <div class="{{ message.tags }}" role="alert">
+            <strong>{{ message }}</strong>
+            <div id="xbtn" onclick="remove()">
+                <button type="button" id="bt">
+                <span aria-hidden="true" >&times;</span>
+            </button>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %} {% endif %}
+
+
+
+    <script>
+        function remove() {
+            var msg = document.getElementById('none')
+            var btn = document.getElementById('xbtn')
+            msg.style.display = "none"
+        }
+    </script>
+
+    {% block body %} {% endblock body%}
+
+</body>
+
+</html>

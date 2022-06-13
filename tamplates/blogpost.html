@@ -1,0 +1,162 @@
+{% extends 'base.html' %} {% block title %} {{blog.title}} | Ab-Blogs {% endblock title %} {% block body %} {% load humanize %}
+<style>
+    .box {
+        margin: 2% 10% 2% 10%;
+        padding: 3%;
+        width: 50rem;
+        height: auto;
+        border: .3rem solid black;
+    }
+    
+    .blogtitle {
+        color: chocolate;
+    }
+    
+    .blogtext {
+        margin: 1%;
+    }
+    
+    .commentbox {
+        margin: 1% .5% 1% 10%;
+        padding: 2%;
+        width: 50%;
+        border: .2rem solid black;
+        border-radius: 2%;
+    }
+    
+    .dbox {
+        margin: 1% .5% 1% 10%;
+        padding: 2%;
+        width: 50%;
+        color: rgb(241, 241, 241);
+        border: .2rem solid rgb(241, 241, 241);
+        background-color: rgba(239, 239, 239, 0.178);
+        border-radius: 2%;
+    }
+    
+    .comment {
+        margin: 1% 1% 1% 10%;
+        padding: 1%;
+    }
+    
+    .userimg {
+        width: 3%;
+        margin: 0% 1%;
+    }
+    
+    .replayimg {
+        width: 3%;
+        margin: .5% .5% .5% 10%;
+    }
+    
+    .time {
+        border-bottom: .1rem solid #343A40;
+        display: inline-block;
+        margin: 1%;
+    }
+    
+    .txt {
+        margin: 0% 3%;
+    }
+    
+    .dbtn {
+        display: inline-block;
+        color: rgb(241, 241, 241);
+        border: .3rem solid rgb(241, 241, 241);
+        background-color: rgba(239, 239, 239, 0.178);
+        border-radius: .5rem;
+        padding: .5% 1% .5% 1%;
+        margin: .5% 0% .5% .1%;
+        text-decoration: none;
+        font-size: 220%;
+    }
+    
+    .btn {
+        display: inline-block;
+        color: #28A745;
+        border: .1rem solid #28A745;
+        border-radius: .5rem;
+        padding: .5% 1% .5% 1%;
+        margin: .5% 0% .5% .1%;
+        text-decoration: none;
+        font-size: 200%;
+    }
+    
+    .btn:hover {
+        background-color: #28A745;
+        color: #343A40;
+    }
+    
+    .replaybox {
+        margin: 1% .5% 1% .5%;
+        padding: 1%;
+        width: 40%;
+        height: 5%;
+        border: .2rem solid black;
+        border-radius: 2%;
+    }
+    
+    .replayhr {
+        margin: .6%;
+        width: 70%;
+    }
+    
+    .rbtn {
+        display: inline-block;
+        color: #28A745;
+        border: .1rem solid #28A745;
+        border-radius: .5rem;
+        padding: 1% 1% 1% 1%;
+        margin: .5% 0% .5% .1%;
+        text-decoration: none;
+        font-size: 100%;
+    }
+</style>
+
+
+<div class="box">
+    <h2 class="blogtitle">{{blog.title}}</h2>
+    <p class="blogtime">{{blog.time}} by {{blog.writter}}</p>
+
+    <p class="blogtext">{{blog.content}}</p>
+    <hr>
+</div>
+
+<form action="/blogcomment" method='post'>
+    {% csrf_token %} {% if user.is_authenticated %}
+    <input class="commentbox" type="text" name="comment" placeholder="Enter comment here">
+    <input type="hidden" name="blogsno" value="{{blog.sno}}">
+    <input class="btn" type="submit" value="↪"> {% else %}
+    <input class="dbox" disabled name="comment" placeholder="Please Log In To Post Comment">
+    <input class="dbtn" type="submit" value="↪" disabled> {% endif %}
+
+</form>
+
+<h1 class="comment">Comments ({{comments.count}})</h1>
+{% for comment in comments %}
+
+
+<div class="comment">
+    <img class="userimg" src="/media/img/img2.png" alt="noimg">
+    <span>{{comment.user.username|title}}</span>
+    <br>
+    <p class="time">{{comment.time | naturaltime}}</p>
+    <p class="txt">{{comment.comment}}</p>
+</div>
+<!-- <form action="/blogcomment" method='post'>
+    {% csrf_token %} {% if user.is_authenticated %}
+    <img class="replayimg" src="/media/img/img2.png" alt="noimg">
+
+    <input class="replaybox" type="text" name="comment" placeholder="Enter Replay Here">
+    <input type="hidden" name="blogsno" value="{{blog.sno}}">
+    <input type="hidden" name="commentsno" value="{{comment.sno}}">
+    <input class="rbtn" type="submit" value="↪"> {% else %}
+    <input class="dbox" disabled name="comment" placeholder="Please Log In To Post Comment">
+    <input class="dbtn" type="submit" value="↪" disabled>
+
+
+
+</form> -->
+{% endif %}
+<!-- {{getval}}  -->
+{% endfor %} {% endblock body %}

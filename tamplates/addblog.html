@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block title %} Add Blog | Ab-Blogs {% endblock title %} {% block body %}
+<style>
+    .input {
+        width: 42rem;
+        height: 2rem;
+        margin: 1% 1% .1% 10vw;
+        padding: .5% 1% .5% 1%;
+        background-color: #343A40;
+        color: aqua;
+        border: .3rem solid #28A745;
+        display: inline-block;
+        border-radius: .5rem;
+    }
+    
+    #blogcontent {
+        overflow: scroll;
+        width: 50rem;
+        height: 35rem;
+    }
+    
+    .btn {
+        display: inline-block;
+        color: #28A745;
+        border: .1rem solid #28A745;
+        border-radius: .5rem;
+        width: 7rem;
+        height: 3rem;
+        padding: .5% 1% .5% 1%;
+        margin: 1% 0% .1% 0%;
+    }
+    
+    .btn:hover {
+        background-color: #28A745;
+        color: #343A40;
+    }
+    
+    .form {
+        margin-top: 1rem;
+    }
+</style>
+
+
+<form class="form" action="" method="post">
+    {% csrf_token %}
+
+    <input required type="text" name="blogtitle" placeholder="ENTER BLOG TITLE" id="blogtitle" class="input">
+    <!-- <input type="text" name="blogwritter" placeholder="ENTER BLOG WRITTER NAME" id="blogwritter" class="input"> -->
+    <button type="submit" class="btn"> CREATE</button>
+    <textarea required name="blogcontent" placeholder="ENTER BLOG CONTENT" id="blogcontent" class="input"></textarea>
+</form>
+
+{% endblock body %}

@@ -1,0 +1,100 @@
+{% extends 'base.html' %} {% block title %} Signin | Ab-Blogs {% endblock title %} {% block body %}
+
+
+<style>
+    #signin {
+        border: .1rem solid black;
+        width: 60rem;
+        height: 30rem;
+        text-align: center;
+        margin: 1rem 1rem 1rem 10rem;
+    }
+    
+    #signinh1 {
+        text-align: center;
+        color: #343A40;
+        margin: 1rem 1rem 1rem 1rem;
+    }
+    
+    .input {
+        width: 23rem;
+        height: 1rem;
+        margin: 3% 1% 1% 1%;
+        padding: 2%;
+        background-color: #343A40;
+        color: aqua;
+        border: .3rem solid #28A745;
+        display: inline-block;
+        border-radius: .5rem;
+    }
+    
+    .msg {
+        background-color: #D4EDDA;
+        color: #343A40;
+        padding: 1%;
+    }
+    
+    .danger {
+        background-color: #f5d1d4;
+        color: #343A40;
+        padding: 1%;
+    }
+    
+    .btn {
+        display: inline-block;
+        color: #28A745;
+        border: .1rem solid #28A745;
+        border-radius: .5rem;
+        width: 40%;
+        height: 3rem;
+        padding: .5% 1% .5% 1%;
+        margin: 1% 0% .5% 1%;
+    }
+    
+    .btn:hover {
+        background-color: #28A745;
+        color: #343A40;
+    }
+    
+    .list {
+        margin: 1rem 1rem 1rem 15vw;
+        line-height: 2rem;
+        letter-spacing: .1rem;
+    }
+</style>
+
+
+
+
+
+
+
+
+<div id="signin">
+    <h1 id="signinh1">Signin Your Accocunt</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <input type="text" name="fname" placeholder="ENTER YOUR FIRST NAME" id="fname" class="input">
+        <input type="text" name="lname" placeholder="ENTER YOUR LAST NAME" id="lname" class="input">
+        <input type="text" name="uname" placeholder="ENTER YOUR USER NAME" id="uname" class="input">
+        <input type="email" name="email" placeholder="ENTER YOUR EMAIL ADDRESS" id="email" class="input">
+        <input type="password" name="pass1" placeholder="CHOOSE YOUR PASSWORD" id="pass1" class="input">
+        <input type="password" name="pass2" placeholder="ENTER APASSWORD AGAIN " id="pass2" class="input">
+        <button type="submit" class="btn"> CREATE</button>
+    </form>
+
+
+</div>
+<list>
+    <ul class="list">
+
+        <li>Name Is Must Be Letters Like : Example</li>
+        <li>User Name Is Must Be Alpha Numaric And Greater Then 8 Characters like : example123</li>
+        <li>Password Is Must Be A Greater Than 8 Character</li>
+    </ul>
+</list>
+
+
+
+{% endblock body%}
